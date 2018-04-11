@@ -40,6 +40,11 @@
       "destination": "~/fortify.license"
     },
     {
+      "type": "file",
+      "source": "setenv.sh",
+      "destination": "~/setenv.sh"
+    },
+    {
       "type": "shell",
       "scripts": [
         "install-tools.sh",
