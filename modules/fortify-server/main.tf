@@ -1,8 +1,4 @@
 # ---------------------------------------------------------------------------------------------------------------------
-variable "fortify_ssh_port" {
-  description = "The port used to resolve ssh for Fortify instance connections"
-  default     = 22
-}
 # THESE TEMPLATES REQUIRE TERRAFORM VERSION 0.8 AND ABOVE
 # ---------------------------------------------------------------------------------------------------------------------
 
@@ -66,3 +62,39 @@ data "template_file" "fortify_user_data" {
     fortify_ip           = ""
   }
 }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# ATTACH AN IAM ROLE TO THE FORTIFY INSTANCE
+# We can use an IAM role to grant the instance IAM permissions so we can use the AWS CLI without having to figure out
+# how to get our secret AWS access keys onto the box.
+# ---------------------------------------------------------------------------------------------------------------------
+resource "aws_iam_instance_profile" "instance_profile" {
+  name_prefix  = "${var.instance_name}"
+  path         = "${var.instance_profile_path}"
+  role         = "${aws_iam_role.instance_role.name}"
+}
+
+resource "aws_iam_role" "instance_role" {
+  name_prefix        = "${var.instance_name}"
+  assume_role_policy = "${data.aws_iam_policy_document.instance_role.json}" 
+}
+
+data "aws_iam_policy_document" "instance_role" {
+  statement {
+    effect   = "Allow"
+    actions  = ["sts:AssumeRole"]
+
+    principals {
+      type           = "Service"
+      identifiers    = ["ec2.amazonaws.com"]
+    } 
+  }
+}
+
+module "iam_s3_policies" {
+  source         = "../s3-bucket-policies-to-role"
+  iam_role_id    = "${aws_iam_role.instance_role.id}"
+  s3_bucket_name = "ascent-fortify"
+}
+
+
