@@ -30,10 +30,6 @@ variable "subnet_ids" {
   type        = "list"
 }
 
-variable "fortify_jdbc_url" {
-  description = "The jdbc url for connecting to the database for fortify"
-}
-
 variable "fortify_db_username" {
   description = "The database username with which to authenticate"
 } 
@@ -46,10 +42,21 @@ variable "fortify_db_driver_class" {
   description = "The driver class of fortify's database"
 }
 
+
 # ---------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
 # These parameters have reasonable defaults.
 # ---------------------------------------------------------------------------------------------------------------------
+
+variable "db_name" {
+  description = "The name of the database"
+  default     = "ssc"
+}
+
+variable "mysql_version" {
+  description = "The version of the mysql database engine"
+  default     = "5.6"
+}
 
 variable "user_data" {
   description = "A User data script to execute whil the server is booting."
