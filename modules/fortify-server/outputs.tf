@@ -5,3 +5,4 @@ output "security_group_id" {
 output "fortify_private_ip" {
   value = "${aws_instance.fortify.private_ip}"
 }
+
