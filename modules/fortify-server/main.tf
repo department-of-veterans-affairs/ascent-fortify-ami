@@ -19,7 +19,7 @@ resource "aws_instance" "fortify" {
   associate_public_ip_address = "${var.associate_public_ip_address}"
   vpc_security_group_ids      = ["${aws_security_group.fortify_security_group.id}"]
   user_data                   = "${var.user_data == "" ? data.template_file.fortify_user_data.rendered : var.user_data}"
-
+  iam_instance_profile        = "${aws_iam_instance_profile.instance_profile.name}"
   tags {
       Name = "${var.instance_name}"
   }
@@ -54,12 +54,14 @@ module "security_group_rules" {
 # ---------------------------------------------------------------------------------------------------------------------
 # Default User Data script
 # ---------------------------------------------------------------------------------------------------------------------
-
 data "template_file" "fortify_user_data" {
   template = "${file("${path.module}/fortify-user-data.sh")}"
 
   vars {
-    fortify_ip           = ""
+    fortify_jdbc_url            = "${var.fortify_jdbc_url}"
+    fortify_db_username         = "${var.fortify_db_username}"
+    fortify_db_password         = "${var.fortify_db_password}"
+    fortify_db_driver_class     = "${var.fortify_db_driver_class}" 
   }
 }
 
