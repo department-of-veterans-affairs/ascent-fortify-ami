@@ -36,13 +36,13 @@
     },
     {
       "type": "file",
-      "source": "fortify.license",
-      "destination": "~/fortify.license"
+      "source": "setenv.sh",
+      "destination": "~/setenv.sh"
     },
     {
       "type": "file",
-      "source": "setenv.sh",
-      "destination": "~/setenv.sh"
+      "source": "wait_for_tomcat_up.sh",
+      "destination": "~/wait_for_tomcat_up.sh"
     },
     {
       "type": "shell",
