@@ -26,7 +26,7 @@ variable "allowed_inbound_security_group_ids" {
   default     = []
 }
 
-variable "fortify_http_port" {
+variable "fortify_port" {
   description = "The port used to resolve Fortify connections"
   default     = 8080
 }
