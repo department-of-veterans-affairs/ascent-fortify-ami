@@ -1,3 +1,4 @@
+
 # ---------------------------------------------------------------------------------------------------------------------
 # REQUIRED PARAMETERS
 # You must provide a value for each of these parameters.
@@ -27,6 +28,22 @@ variable "allowed_inbound_cidr_blocks" {
 variable "subnet_ids" {
   description = "The subnet IDs into which the EC2 instances should be deployed."
   type        = "list"
+}
+
+variable "fortify_jdbc_url" {
+  description = "The jdbc url for connecting to the database for fortify"
+}
+
+variable "fortify_db_username" {
+  description = "The database username with which to authenticate"
+} 
+
+variable "fortify_db_password" {
+  description = "The database password with which to authenticate"
+}
+
+variable "fortify_db_driver_class" {
+  description = "The driver class of fortify's database"
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
