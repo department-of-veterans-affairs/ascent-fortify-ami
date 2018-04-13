@@ -1,0 +1,56 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": "",
+    "aws_region": "us-gov-west-1"
+  },
+
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "region": "{{user `aws_region`}}",
+      "source_ami_filter": { "filters": { "name": "ascent-base-*" }, "most_recent": true },
+      "subnet_id": "subnet-025d7a67",
+      "security_group_id": "sg-505ca734",
+      "instance_type": "t2.micro",
+      "ssh_username": "ec2-user",
+      "ssh_pty": true,
+      "ami_name": "ascent-fortify {{timestamp}}",
+      "tags": {
+        "name": "ascent-fortify"
+      },
+      "snapshot_tags": {
+        "name": "ascent-fortify"
+      }
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "Fortify.zip",
+      "destination": "~/Fortify.zip"
+    },
+    {
+      "type": "file",
+      "source": "fortify.license",
+      "destination": "~/fortify.license"
+    },
+    {
+      "type": "file",
+      "source": "setenv.sh",
+      "destination": "~/setenv.sh"
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "install-tools.sh",
+        "install-java.sh",
+        "install-tomcat.sh",
+        "install-fortify.sh"
+      ]
+    }
+  ]
+}
