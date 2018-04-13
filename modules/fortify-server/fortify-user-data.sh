@@ -11,7 +11,7 @@ sudo mv /fortify.license /root/.fortify/fortify.license
 # ##########################################
 fortify_config_properties=/root/.fortify/ssc/conf/app.properties
 fortify_data_properties=/root/.fortify/ssc/conf/datasource.properties
-fortify_ip=`hostname -I`
+fortify_ip=`hostname -I | xargs`
 
 # The variables below are filled in via Terraform interpolation
 sed -i "s|^host.url=|host.url=http://$fortify_ip:8080/ssc|g" $fortify_config_properties
