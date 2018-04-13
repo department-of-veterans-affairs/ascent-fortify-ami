@@ -47,7 +47,7 @@ module "security_group_rules" {
   allowed_inbound_cidr_blocks        = ["${var.allowed_inbound_cidr_blocks}"]
   allowed_inbound_security_group_ids = ["${var.allowed_inbound_security_group_ids}"]
   allowed_ssh_cidr_blocks            = ["${var.allowed_ssh_cidr_blocks}"]
-  fortify_http_port        = "${var.fortify_http_port}"
+  fortify_port                       = "${var.fortify_http_port}"
 }
 
 
@@ -58,10 +58,10 @@ data "template_file" "fortify_user_data" {
   template = "${file("${path.module}/fortify-user-data.sh")}"
 
   vars {
-    fortify_jdbc_url            = "${var.fortify_jdbc_url}"
+    fortify_jdbc_url            = "jdbc:mysql://${module.fortify-database.endpoint}/${var.db_name}"
     fortify_db_username         = "${var.fortify_db_username}"
     fortify_db_password         = "${var.fortify_db_password}"
-    fortify_db_driver_class     = "${var.fortify_db_driver_class}" 
+    fortify_db_driver_class     = "${var.fortify_db_driver_class}"
   }
 }
 
@@ -78,7 +78,7 @@ resource "aws_iam_instance_profile" "instance_profile" {
 
 resource "aws_iam_role" "instance_role" {
   name_prefix        = "${var.instance_name}"
-  assume_role_policy = "${data.aws_iam_policy_document.instance_role.json}" 
+  assume_role_policy = "${data.aws_iam_policy_document.instance_role.json}"
 }
 
 data "aws_iam_policy_document" "instance_role" {
@@ -89,7 +89,7 @@ data "aws_iam_policy_document" "instance_role" {
     principals {
       type           = "Service"
       identifiers    = ["ec2.amazonaws.com"]
-    } 
+    }
   }
 }
 
@@ -100,3 +100,18 @@ module "iam_s3_policies" {
 }
 
 
+
+# ---------------------------------------------------------------------------------------------------------------------
+# The Database for Fortify to Use
+# ---------------------------------------------------------------------------------------------------------------------
+
+module "fortify-database" {
+  source                               = "../fortify-database"
+  fortify_db_username                  = "${var.fortify_db_username}"
+  fortify_db_password                  = "${var.fortify_db_password}"
+  fortify_db_name                      = "${var.db_name}"
+  fortify_db_identifier                = "${var.instance_name}-database"
+  fortify_subnet_ids                   = ["${var.subnet_ids}"]
+  allowed_inbound_cidr_blocks          = ["0.0.0.0/0"]
+  vpc_id                               = "${var.vpc_id}"
+}
