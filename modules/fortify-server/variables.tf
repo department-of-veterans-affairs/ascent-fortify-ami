@@ -48,9 +48,13 @@ variable "fortify_db_driver_class" {
 # These parameters have reasonable defaults.
 # ---------------------------------------------------------------------------------------------------------------------
 
-variable "db_name" {
-  description = "The name of the database"
-  default     = "ssc"
+variable "root_db_name" {
+  description = "The name of the database created by rds on when it first comes up"
+  default     = "rootdb"
+}
+variable "fortify_db_name" {
+  description = "The name of the database that fortify will use"
+  default     = "ssc-cs"
 }
 
 variable "mysql_version" {

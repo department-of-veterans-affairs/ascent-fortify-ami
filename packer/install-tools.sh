@@ -1,19 +1,15 @@
 #!/bin/bash
 
 # Update
-sudo yum -y update
+sudo yum -y update --quiet
 
 # Install uzip utility
-sudo yum -y install unzip
+sudo yum -y install unzip --quiet
 
-# Install wget
-sudo yum -y install wget
+# Install rpm-build for SCA stuff
+sudo yum install -y rpm-build --quiet
 
-# aws cli
-curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-unzip awscli-bundle.zip
-sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
-
-# jq command line JSON parser
-sudo wget -O /usr/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
-sudo chmod 755 /usr/bin/jq
+# install mysql client to run the create-tables.sql script on database
+wget https://dev.mysql.com/get/Downloads/MySQL-5.5/MySQL-client-5.5.59-1.el7.x86_64.rpm
+sudo yum localinstall -y MySQL-client-5.5.59-1.el7.x86_64.rpm --quiet
+sudo yum install -y MySQL-client --quiet

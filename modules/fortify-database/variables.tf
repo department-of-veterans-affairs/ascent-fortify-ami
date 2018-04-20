@@ -33,9 +33,9 @@ variable "allowed_inbound_cidr_blocks" {
 # These parameters have reasonable defaults.
 # ---------------------------------------------------------------------------------------------------------------------
 
-variable "fortify_db_name" {
-  description = "The name of the database to connect to"
-  default     = "ssc"
+variable "root_db_name" {
+  description = "The name of the database first created by rds"
+  default     = "rootdb"
 }
 
 variable "mysql_version" {
@@ -60,4 +60,5 @@ variable "fortify_port" {
   description = "The port used to reach the database"
   default     = 3306
 }
+
 

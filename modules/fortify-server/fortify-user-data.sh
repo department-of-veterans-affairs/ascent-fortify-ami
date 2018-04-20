@@ -1,26 +1,15 @@
 #!/bin/bash
 
-# ##########################################
-# Acquire fortify license from s3 bucket
-# ##########################################
-aws s3api get-object --bucket ascent-fortify --key fortify.license --region us-gov-west-1 fortify.license
-sudo mv /fortify.license /root/.fortify/fortify.license
+fortify_db_name
+fortify_jdbc_url=$2
+fortify_db_driver_class=$3
+fortify_db_username=$4
+fortify_db_password=$5
+fortify_db_endpoint=$6
+root_db_name=$7
 
-# ##########################################
-# Do some configuration stuff for fortify
-# ##########################################
-fortify_config_properties=/root/.fortify/ssc/conf/app.properties
-fortify_data_properties=/root/.fortify/ssc/conf/datasource.properties
-fortify_ip=`hostname -I | xargs`
 
-# The variables below are filled in via Terraform interpolation
-sed -i "s|^host.url=|host.url=http://$fortify_ip:8080/ssc|g" $fortify_config_properties
-sed -i 's|^jdbc.url=|jdbc.url=${fortify_jdbc_url}|g' $fortify_data_properties
-sed -i 's|^db.driver.class=|db.driver.class=${fortify_db_driver_class}|g' $fortify_data_properties
-sed -i 's|^db.username=|db.username=${fortify_db_username}|g' $fortify_data_properties
-sed -i 's|^db.password=|db.password=${fortify_db_password}|g' $fortify_data_properties
+/home/ec2-user/run-fortify-ssc.sh ${fortify_db_name} ${fortify_jdbc_url} ${fortify_db_driver_class} ${fortify_db_username} ${fortify_db_password} ${fortify_db_endpoint} ${root_db_name}> /home/ec2-user/run-fortify-ssc.out 2>&1
 
-# #########################################
-# Start Fortify
-# #########################################
-sudo tomcatup
+/home/ec2-user/run-sca.sh > /home/ec2-user/run-sca.out 2>&1
+

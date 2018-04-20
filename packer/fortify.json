@@ -15,6 +15,7 @@
       "subnet_id": "subnet-025d7a67",
       "security_group_id": "sg-505ca734",
       "instance_type": "t2.micro",
+      "iam_instance_profile": "read_fortify_bucket",
       "ssh_username": "ec2-user",
       "ssh_pty": true,
       "ami_name": "ascent-fortify {{timestamp}}",
@@ -30,13 +31,13 @@
   "provisioners": [
     {
       "type": "file",
-      "source": "Fortify.zip",
-      "destination": "~/Fortify.zip"
+      "source": "setenv.sh",
+      "destination": "~/setenv.sh"
     },
     {
       "type": "file",
-      "source": "setenv.sh",
-      "destination": "~/setenv.sh"
+      "source": "create-ssc-db.sql",
+      "destination": "~/create-ssc-db.sql"
     },
     {
       "type": "file",
@@ -44,12 +45,33 @@
       "destination": "~/wait_for_tomcat_up.sh"
     },
     {
+      "type": "file",
+      "source": "setupFortify.js",
+      "destination": "~/setupFortify.js"
+    },
+    {
+      "type": "file",
+      "source": "run-fortify-ssc.sh",
+      "destination": "~/run-fortify-ssc.sh"
+    },
+    {
+      "type": "file",
+      "source": "fortify-sca.options",
+      "destination": "/home/ec2-user/fortify-sca.options"
+    },
+    {
+      "type": "file",
+      "source": "run-sca.sh",
+      "destination": "~/run-sca.sh"
+    },
+    {
       "type": "shell",
       "scripts": [
         "install-tools.sh",
         "install-java.sh",
         "install-tomcat.sh",
-        "install-fortify.sh"
+        "install-fortify.sh",
+        "download-phantomjs.sh"
       ]
     }
   ]

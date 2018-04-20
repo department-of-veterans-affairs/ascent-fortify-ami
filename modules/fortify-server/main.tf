@@ -58,7 +58,10 @@ data "template_file" "fortify_user_data" {
   template = "${file("${path.module}/fortify-user-data.sh")}"
 
   vars {
-    fortify_jdbc_url            = "jdbc:mysql://${module.fortify-database.endpoint}/${var.db_name}"
+    fortify_jdbc_url            = "jdbc:mysql://${module.fortify-database.endpoint}/${var.fortify_db_name}"
+    fortify_db_name             = "${var.fortify_db_name}"
+    root_db_name                = "${var.root_db_name}"
+    fortify_db_endpoint         = "${module.fortify-database.endpoint}"
     fortify_db_username         = "${var.fortify_db_username}"
     fortify_db_password         = "${var.fortify_db_password}"
     fortify_db_driver_class     = "${var.fortify_db_driver_class}"
@@ -109,7 +112,7 @@ module "fortify-database" {
   source                               = "../fortify-database"
   fortify_db_username                  = "${var.fortify_db_username}"
   fortify_db_password                  = "${var.fortify_db_password}"
-  fortify_db_name                      = "${var.db_name}"
+  root_db_name                         = "${var.root_db_name}"
   fortify_db_identifier                = "${var.instance_name}-database"
   fortify_subnet_ids                   = ["${var.subnet_ids}"]
   allowed_inbound_cidr_blocks          = ["0.0.0.0/0"]

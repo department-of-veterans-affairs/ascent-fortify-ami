@@ -6,10 +6,10 @@ terraform {
   required_version = ">= 0.9.3"
 }
 
+
 # ---------------------------------------------------------------------------------------------------------------------
 # CREATE A DATABASE INSTANCE
 # ---------------------------------------------------------------------------------------------------------------------
-
 resource "aws_db_instance" "fortify_database_instance" {
   allocated_storage      = 20
   identifier             = "${var.fortify_db_identifier}"
@@ -18,9 +18,13 @@ resource "aws_db_instance" "fortify_database_instance" {
   engine_version         = "${var.mysql_version}"
   username               = "${var.fortify_db_username}"
   password               = "${var.fortify_db_password}"
-  name                   = "${var.fortify_db_name}"
+  name                   = "${var.root_db_name}"
   vpc_security_group_ids = ["${aws_security_group.fortify_database_security_group.id}"]
   db_subnet_group_name   = "${aws_db_subnet_group.fortify_subnet_group.id}"
+  parameter_group_name   = "${var.fortify_db_identifier}"
+  # TODO: may need to change this later. Leave true for now for
+  #    testing purposes
+  skip_final_snapshot    = true
 }
 
 resource "aws_db_subnet_group" "fortify_subnet_group" {
@@ -32,6 +36,11 @@ resource "aws_db_subnet_group" "fortify_subnet_group" {
   }
 }
 
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# CREATE A SECURITY GROUP FOR THE INSTANCE
+# ---------------------------------------------------------------------------------------------------------------------
 resource "aws_security_group" "fortify_database_security_group" {
   name_prefix            = "${var.fortify_db_identifier}-security_group"
   description            = "Security group for the ${var.fortify_db_identifier} db instance"
@@ -49,4 +58,20 @@ module "security_group_rules" {
   allowed_ssh_cidr_blocks                       = ["${var.allowed_ssh_cidr_blocks}"]
   fortify_port                                  = "${var.fortify_port}"
 }
+
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# CREATE A PARAMETER GROUP FOR THE DATABASE
+# ---------------------------------------------------------------------------------------------------------------------
+module "fortify-db-parameter-groups" "parameter_group" {
+ source = "../fortify-db-parameter-groups" 
+ name   = "${var.fortify_db_identifier}"
+ family = "mysql${var.mysql_version}"
+}
+
+
+
+
+
 
