@@ -127,15 +127,15 @@ steps = [
 
     function(){
       console.log("Step 9 - Wait until Seeding is done...")
-      page.evaluate(function waitSeedingEnd() {
+      isSeeding = page.evaluate(function waitSeedingEnd() {
         var scope = angular.element($("#wait")).scope();
         isSeeding = scope.dbSeedingVM.isSeeding
         if(isSeeding===true) {
           console.log("try again. seeding: " + isSeeding)
-          setTimeout(waitSeedingEnd,  500)
-          return
+          return true
+        } else {
+          return false
         }
-        console.log("Seeding: " + isSeeding)
       });
       page.render('9.png')
     },
@@ -163,7 +163,7 @@ steps = [
         if(isSeeding===true) {
           console.log("try again. seeding: " + isSeeding)
           setTimeout(waitSeedingEnd,  500)
-          return isSeeding
+          return true
         }
         console.log("Seeding: " + isSeeding)
       });
@@ -209,15 +209,16 @@ interval = setInterval(executeRequestsStepByStep,5000);
 
 
 function executeRequestsStepByStep(){
+  console.log("executeRequests: isSeeding=" + isSeeding)
     if (loadInProgress == false && typeof steps[testindex] == "function" && isSeeding == false) {
         //console.log("step " + (testindex + 1));
         steps[testindex]();
         testindex++;
+
     }
 
     if (isSeeding == true) {
       console.log("pause...")
-      setTimeout(executeRequestsStepByStep(), 500)
     }
 
     if (typeof steps[testindex] != "function") {
