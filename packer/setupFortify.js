@@ -80,7 +80,7 @@ steps = [
     //Step 6a - Input the database username
     function() {
       console.log("Step 6a - Input the database username")
-      sendKeys(page, "#databaseUsername", "blah");
+      sendKeys(page, "#databaseUsername", "DATABASE_USERNAME");
       page.render('6a.png');
     },
 
@@ -88,7 +88,7 @@ steps = [
     // Step 6b - Input the database password
     function() {
       console.log("Step 6b - Input the database password")
-      sendKeys(page, "#databasePassword", "blahblahblah");
+      sendKeys(page, "#databasePassword", "DATABASE_PASSWORD");
       page.render('6b.png')
     },
 

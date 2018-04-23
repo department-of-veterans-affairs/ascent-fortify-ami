@@ -85,6 +85,10 @@ while [ $keepgoing -eq 0 ]; do
 done
 
 
+# --- replace the DATABASE_USERNAME and DATABASE_PASSWORD in phantomjs script
+sed -i "s/DATABASE_USERNAME/$fortify_db_username/g" /home/ec2-user/setupFortify.js
+sed -i "s/DATABASE_PASSWORD/$fortify_db_password/g" /home/ec2-user/setupFortify.js
+
 sudo cp /root/.fortify/ssc/init.token /home/ec2-user/init.token
 echo "Setting up ssc..."
 sudo phantomjs /home/ec2-user/setupFortify.js
