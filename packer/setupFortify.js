@@ -162,8 +162,9 @@ steps = [
         isSeeding = scope.dbSeedingVM.isSeeding
         if(isSeeding===true) {
           console.log("try again. seeding: " + isSeeding)
-          setTimeout(waitSeedingEnd,  500)
           return true
+        } else {
+          return false
         }
         console.log("Seeding: " + isSeeding)
       });
@@ -215,10 +216,11 @@ function executeRequestsStepByStep(){
         steps[testindex]();
         testindex++;
 
-    }
-
-    if (isSeeding == true) {
+    } else if (loadInProgress == false && typeof steps[testindex] == "function" && isSeeding == true) {
       console.log("pause...")
+      // had already proceeded to the next step, so re-execute the step before of checking if
+      // isSeeding is true/false
+      steps[testindex - 1]();
     }
 
     if (typeof steps[testindex] != "function") {
