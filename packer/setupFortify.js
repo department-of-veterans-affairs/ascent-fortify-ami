@@ -80,6 +80,8 @@ steps = [
     //Step 6a - Input the database username
     function() {
       console.log("Step 6a - Input the database username")
+      // DATABASE_USERNAME is replaced later by sed in run-fortify-ssc.sh
+      //      with a terraform variable value
       sendKeys(page, "#databaseUsername", "DATABASE_USERNAME");
       page.render('6a.png');
     },
@@ -88,6 +90,8 @@ steps = [
     // Step 6b - Input the database password
     function() {
       console.log("Step 6b - Input the database password")
+      // DATABASE_PASSWORD is replaced later by sed in run-fortify-ssc.sh
+      //      with a terraform variable value
       sendKeys(page, "#databasePassword", "DATABASE_PASSWORD");
       page.render('6b.png')
     },
