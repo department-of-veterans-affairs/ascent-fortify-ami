@@ -115,6 +115,6 @@ module "fortify-database" {
   root_db_name                         = "${var.root_db_name}"
   fortify_db_identifier                = "${var.instance_name}-database"
   fortify_subnet_ids                   = ["${var.subnet_ids}"]
-  allowed_inbound_cidr_blocks          = ["0.0.0.0/0"]
+  allowed_inbound_security_group_ids   = ["${aws_security_group.fortify_security_group.id}"]
   vpc_id                               = "${var.vpc_id}"
 }
