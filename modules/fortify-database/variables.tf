@@ -25,9 +25,8 @@ variable "vpc_id" {
 }
 
 
-variable "allowed_inbound_security_group_ids" {
-  description = "The list of security group IDs that the Fortify instance uses, so the fortify instance will be allowed"
-  type        = "list"
+variable "allowed_inbound_security_group_id" {
+  description = "The security group ID that the Fortify instance uses, so the fortify instance will be allowed"
 }
 
 # ---------------------------------------------------------------------------------------------------------------------

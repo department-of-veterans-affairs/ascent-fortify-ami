@@ -53,7 +53,7 @@ resource "aws_security_group" "fortify_database_security_group" {
 module "security_group_rules" {
   source = "../rds-security-group-rules"
   security_group_id                             = "${aws_security_group.fortify_database_security_group.id}"
-  allowed_inbound_security_group_ids            = ["${var.allowed_inbound_security_group_ids}"]
+  allowed_inbound_security_group_id             = "${var.allowed_inbound_security_group_id}"
 }
 
 
