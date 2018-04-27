@@ -11,6 +11,6 @@ sudo chmod 700 $TOMCAT_BIN/*.sh
 sudo ln -s $TOMCAT_BIN/startup.sh /usr/bin/tomcatup
 sudo ln -s $TOMCAT_BIN/shutdown.sh /usr/bin/tomcatdown
 
-sudo tomcatup
-sleep 30
+sudo chmod 755 /home/ec2-user/wait_for_tomcat_up.sh
+sudo /home/ec2-user/wait_for_tomcat_up.sh
 
