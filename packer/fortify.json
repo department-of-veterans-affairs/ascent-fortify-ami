@@ -61,8 +61,8 @@
     },
     {
       "type": "file",
-      "source": "run-sca.sh",
-      "destination": "~/run-sca.sh"
+      "source": "run-sca-jenkins-node.sh",
+      "destination": "~/run-sca-jenkins-node.sh"
     },
     {
       "type": "shell",
