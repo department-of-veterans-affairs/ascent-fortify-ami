@@ -15,7 +15,7 @@ resource "aws_instance" "jenkins_fortify_node" {
   instance_type               = "${var.instance_type}"
   ami                         = "${var.ami_id}"
   key_name                    = "${var.ssh_key_name}"
-  subnet_id                   = "${var.subnet_ids[length(var.subnet_ids) - 1]}"
+  subnet_id                   = "${var.subnet_id}"
   associate_public_ip_address = "${var.associate_public_ip_address}"
   vpc_security_group_ids      = ["${aws_security_group.fortify_security_group.id}"]
   user_data                   = "${var.user_data == "" ? data.template_file.fortify_user_data.rendered : var.user_data}"
@@ -54,7 +54,7 @@ resource "aws_security_group" "fortify_security_group" {
 module "security_group_rules" {
   source = "../jenkins-node-security-group-rules"
   security_group_id                  = "${aws_security_group.fortify_security_group.id}"
-  allowed_ssh_cidr_blocks        = ["0.0.0.0/0"]
+  allowed_ssh_cidr_blocks        = ["${var.allowed_ssh_cidr_blocks}"]
 }
 
 
