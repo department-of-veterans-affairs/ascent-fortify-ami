@@ -61,8 +61,13 @@
     },
     {
       "type": "file",
+      "source": "run-register-jenkins-node.sh",
+      "destination": "~/run-register-jenkins-node.sh"
+    },
+    {
+      "type": "file",
       "source": "run-sca.sh",
-      "destination": "~/run-sca.sh"
+      "destination": "/home/ec2-user/run-sca.sh"
     },
     {
       "type": "shell",

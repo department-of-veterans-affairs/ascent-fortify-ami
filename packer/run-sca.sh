@@ -1,4 +1,12 @@
 #!/bin/bash
+set -e
+
+# ##########################################
+# Acquire fortify license from s3 bucket
+# ##########################################
+aws s3api get-object --bucket ascent-fortify --key fortify.license --region us-gov-west-1 fortify.license
+sudo cp /fortify.license /root/.fortify/fortify.license
+
 
 echo "Installing sca.."
 sudo cp /fortify.license /opt/fortify_sca/fortify.license
@@ -15,4 +23,5 @@ sudo ln -s $FORTIFY_APPS_BIN/fortifyupdate $BIN/fortifyupdate
 sudo ln -s $FORTIFY_APPS_BIN/FPRUtility $BIN/FPRUtility
 sudo ln -s $FORTIFY_APPS_BIN/sourceanalyzer $BIN/sourceanalyzer
 echo "done!"
-
+echo ""
+echo ""
