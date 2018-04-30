@@ -15,9 +15,8 @@ variable "instance_type" {
   description = "The type of EC2 Instances to run for the fortify instance (e.g. m4.large)"
 }
 
-variable "subnet_ids" {
+variable "subnet_id" {
   description = "The subnet IDs into which the EC2 instances should be deployed."
-  type        = "list"
 }
 
 variable "vpc_id" {
@@ -88,4 +87,9 @@ variable "user_data" {
 variable "associate_public_ip_address" {
   description = "If set to true, associate a public IP address with the Fortify instance"
   default     = false
+}
+
+variable "allowed_ssh_cidr_blocks" {
+  description = "The cidr block(s) allowed to connected through ssh"
+  default     = ["0.0.0.0/0"]
 }
