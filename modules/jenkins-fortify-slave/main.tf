@@ -74,6 +74,7 @@ data "template_file" "fortify_user_data" {
     agent-description           = "${var.agent-description}"
     agent-label-name            = "${var.agent-label-name}"
     credentials_id              = "${var.credentials_id}"
+    vault_url                   = "${var.vault_url}"
   }
 }
 

@@ -54,6 +54,11 @@ variable "jenkins_url" {
   default     = "http://jenkins.internal.vets-api.gov:8080"
 }
 
+variable "vault_url" {
+  description = "The url of the vault server"
+  default     = "https://vault.internal.vets-api.gov:8200"
+}
+
 variable "agent-name" {
   description = "The name of the jenkins agent/node/slave"
   default     = "fortify-sca"
