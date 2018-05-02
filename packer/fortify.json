@@ -74,6 +74,7 @@
       "scripts": [
         "install-tools.sh",
         "install-java.sh",
+        "install-maven.sh",
         "install-tomcat.sh",
         "install-fortify.sh",
         "download-phantomjs.sh"
