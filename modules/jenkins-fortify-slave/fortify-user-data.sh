@@ -13,4 +13,5 @@
                                        "${agent-description}" \
                                        ${agent-label-name} \
                                        ${credentials_id} \
+                                       ${vault_url} \
                                        > /home/ec2-user/run-register-jenkins-node.out 2>&1

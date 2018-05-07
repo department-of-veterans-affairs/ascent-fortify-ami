@@ -15,6 +15,7 @@ agent_name=$6
 agent_description=$7
 agent_label_name=$8
 credentials_id=$9
+VAULT_ADDR=${10}
 
 export node_ip_address=`hostname -I | xargs`
 
@@ -28,6 +29,17 @@ echo "agent_description=${agent_description}"
 echo "agent_label_name=${agent_label_name}"
 echo "node_ip_address=${node_ip_address}"
 echo "credentials_id=${credentials_id}"
+echo "VAULT_ADDR=${VAULT_ADDR}"
+
+echo "********************************************************************************"
+echo "Add trust store for jvm"
+echo "Downloading Vault CA certificate from $VAULT_ADDR/v1/pki/ca/pem";
+source /home/ec2-user/.bash_profile
+echo "JAVA_HOME=$JAVA_HOME"
+sudo curl -L -s --insecure ${VAULT_ADDR}/v1/pki/ca/pem | sudo tee -a /tmp/vault-ca.pem;
+openssl x509 -in /tmp/vault-ca.pem -inform pem -out /tmp/vault-ca.der -outform der
+yes | sudo $JAVA_HOME/bin/keytool -importcert -alias vets -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit -file /tmp/vault-ca.der
+
 
 echo "###################################"
 echo "Create host user for jenkins"
@@ -48,6 +60,18 @@ printf 'Defaults:"'"${FORTIFY_SSH_USER}"'" !requiretty\n' | EDITOR='tee -a' visu
 
 echo "- TURNING OFF NOPASSWD FOR WHEEL"
 sudo sed --in-place 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+NOPASSWD:\s\+ALL\)/\1/' /etc/sudoers
+
+echo "- GIVING MY .bash_profile TO THE JENKINS USER"
+sudo cp /home/ec2-user/.bash_profile /home/jenkins/.bash_profile
+sudo chown jenkins:jenkins /home/jenkins/.bash_profile
+
+echo "- GIVING jenkins OWNERSHIP to the /opt/fortify-maven-plugin and everything below"
+sudo chown -R jenkins:jenkins /opt/fortify-maven-plugin
+sudo chown -R jenkins:jenkins /opt/fortify-maven-plugin/*
+
+echo "- INSTALL fortify-maven-plugin FOR JENKINS USER"
+cd /opt/fortify-maven-plugin
+sudo su jenkins -c "source /home/jenkins/.bash_profile; mvn clean install;"
 
 echo "- DONE"
 echo ""
