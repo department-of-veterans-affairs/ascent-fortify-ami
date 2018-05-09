@@ -10,7 +10,7 @@ variable "instance_name" {
 
 variable "ami_id" {
   description = "The ID of the AMI to run in this cluster."
-}  
+}
 
 variable "instance_type" {
   description = "The type of EC2 Instances to run for the fortify instance (e.g. m4.large)"
@@ -32,7 +32,7 @@ variable "subnet_ids" {
 
 variable "fortify_db_username" {
   description = "The database username with which to authenticate"
-} 
+}
 
 variable "fortify_db_password" {
   description = "The database password with which to authenticate"
@@ -47,6 +47,10 @@ variable "fortify_db_driver_class" {
 # OPTIONAL PARAMETERS
 # These parameters have reasonable defaults.
 # ---------------------------------------------------------------------------------------------------------------------
+variable "san" {
+  description = "The value for the SAN tag of the instance"
+  default     = "fortify.internal.vets-api.gov"
+}
 
 variable "root_db_name" {
   description = "The name of the database created by rds on when it first comes up"
@@ -139,18 +143,3 @@ variable "instance_profile_path" {
   description = "Path in which to create the IAM instance profile"
   default     = "/"
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

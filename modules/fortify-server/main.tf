@@ -22,6 +22,7 @@ resource "aws_instance" "fortify" {
   iam_instance_profile        = "${aws_iam_instance_profile.instance_profile.name}"
   tags {
       Name = "${var.instance_name}"
+      SAN = "${var.san}"
   }
 }
 
