@@ -4,7 +4,7 @@
 # Set all of the commandline variables
 # supplied from fortify-user-data.sh
 # ##########################################
-NUMBER_CLI_ARGS=7
+NUMBER_CLI_ARGS=8
 
 # Check that we have the right amount of args
 if [ "$#" -ne $NUMBER_CLI_ARGS ]; then
@@ -20,6 +20,7 @@ fortify_db_username=$4
 fortify_db_password=$5
 fortify_db_endpoint=$6
 root_db_name=$7
+fortify_dns=$8
 
 
 # Output the variables for debugging
@@ -30,6 +31,7 @@ echo "fortify_db_username=$fortify_db_username"
 echo "fortify_db_password=$fortify_db_password"
 echo "fortify_db_endpoint=$fortify_db_endpoint"
 echo "root_db_name=$root_db_name"
+echo "fortify_dns=$fortify_dns"
 
 
 # ##########################################
@@ -43,9 +45,8 @@ sudo cp /fortify.license /root/.fortify/fortify.license
 # ##########################################
 fortify_config_properties=/root/.fortify/ssc/conf/app.properties
 fortify_data_properties=/root/.fortify/ssc/conf/datasource.properties
-export fortify_ip=`hostname -I | xargs`
 
-sed -i "s|^host.url=|host.url=http://$fortify_ip:8080/ssc|g" $fortify_config_properties
+sed -i "s|^host.url=|host.url=http://$fortify_dns:8080/ssc|g" $fortify_config_properties
 sed -i 's|^host.validation=false|host.validation=true|g' $fortify_config_properties
 sed -i "s|^jdbc.url=|jdbc.url=$fortify_jdbc_url?connectionCollation=latin1_general_cs|g" $fortify_data_properties
 sed -i "s|^db.driver.class=|db.driver.class=$fortify_db_driver_class|g" $fortify_data_properties
