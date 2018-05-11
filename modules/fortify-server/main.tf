@@ -22,6 +22,7 @@ resource "aws_instance" "fortify" {
   iam_instance_profile        = "${aws_iam_instance_profile.instance_profile.name}"
   tags {
       Name = "${var.instance_name}"
+      SAN = "${var.san}"
   }
 }
 
@@ -65,6 +66,7 @@ data "template_file" "fortify_user_data" {
     fortify_db_username         = "${var.fortify_db_username}"
     fortify_db_password         = "${var.fortify_db_password}"
     fortify_db_driver_class     = "${var.fortify_db_driver_class}"
+    fortify_dns                 = "${var.san}"
   }
 }
 
