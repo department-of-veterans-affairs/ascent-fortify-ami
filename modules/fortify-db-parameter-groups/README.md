@@ -27,7 +27,7 @@ Note the following parameters:
 
 
 ### AWS RDS DB parameter group
-The configs are the suggested/required setting that the [SSC Installation Manual](https://community.softwaregrp.com/t5/Fortify-Software-17-20/Fortify-Static-Code-Analyzer-Installation-Guide/ta-p/1622562)) has for the MySQL database engine. The manual says to edit the mysql.cnf to fix the configurations, but as we don't have admin access into the rds instance itself, we use a parameter group instead and have AWS handle actually configuring the database for us. The following are reasonable defaults:
+The configs are the suggested/required setting that the [SSC Installation Manual](https://community.softwaregrp.com/t5/Fortify-Software-17-20/Fortify-Static-Code-Analyzer-Installation-Guide/ta-p/1622562) has for the MySQL database engine. The manual says to edit the mysql.cnf to fix the configurations, but as we don't have admin access into the rds instance itself, we use a parameter group instead and have AWS handle actually configuring the database for us. The following are reasonable defaults:
 
 | Setting Type | Default |
 | ------------ | ------:|
