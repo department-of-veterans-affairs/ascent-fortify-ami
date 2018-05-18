@@ -19,6 +19,8 @@ module "fortify" {
   # ... See variables.tf for the all other required parameters as well as the optional ones
 }
 ```
+Note the following parameter:
+- `source`: Use this parameter to specify the URL of the fortify-server module. The double slash (//) is intentional and required. Terraform uses it to specify subfolders within a Git repo (see module sources). The ref parameter specifies a specific Git tag in this repo. That way, instead of using the latest version of this module from the master branch, which will change every time you run Terraform, you're using a fixed version of the repo.
 
 You can find the other parameters in [variables.tf](https://github.com/department-of-veterans-affairs/ascent-fortify-ami/blob/master/modules/fortify-server/variables.tf)
 
