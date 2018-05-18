@@ -1,4 +1,4 @@
-# Fortify Database
+# Fortify Database Module
 This folder contains a [Terraform](https://www.terraform.io/) module that can be used to deploy an [AWS RDS Instance](https://aws.amazon.com/rds/). This is useful if you need a [MySQL](https://www.mysql.com/) database that's provisioned with everything needed for a [Fortify SSC](https://software.microfocus.com/en-us/products/software-security-assurance-sdlc/overview) server.
 
 ## How do you use this module?

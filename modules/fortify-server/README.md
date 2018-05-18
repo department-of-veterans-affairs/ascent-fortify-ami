@@ -1,4 +1,4 @@
-# Fortify Server
+# Fortify Server Module
 
 This folder contains a [Terraform](https://www.terraform.io/) module that can be used to deploy a [Fortify SSC](https://software.microfocus.com/en-us/products/software-security-assurance-sdlc/overview) V17.20 server with its database in [AWS](https://aws.amazon.com/). This module is designed to deploy an [Amazon Machine Image (AMI)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) that had Fortify SSC installed via the [packer scripts](https://github.com/department-of-veterans-affairs/ascent-fortify-ami/tree/master/packer) in this project.
 
