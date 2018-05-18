@@ -24,11 +24,11 @@ You can find the other parameters in [variables.tf](https://github.com/departmen
 
 ## What's included in this module?
 This architecture consists of the following resources:
-- [Security Group](#Security Group)
-- [IAM role and permissions](#IAM role and permissions)
-- [AWS RDS Instance](#AWS RDS Instance)
-- [AWS RDS subnet group](#AWS RDS subnet group)
-- [AWS RDS DB parameter group](#AWS RDS DB parameter group)
+- [Security Group](#security-group)
+- [IAM role and permissions](#iam-role-and-permissions)
+- [AWS RDS Instance](#aws-rds-instance)
+- [AWS RDS subnet group](#aws-rds-subnet-group)
+- [AWS RDS DB parameter group](#aws-rds-db-parameter-group)
 
 ### Security Group
 The Fortify EC2 Instance has a Security Group that allows:
@@ -69,8 +69,8 @@ A simple solution for this is yet to be discovered, as Fortify SSC's updates req
 
 ## What's NOT included in this module?
 This module does NOT handle the following items, which you may want to provide on your own:
-- [Monitoring, alerting, log aggregation](#Monitoring, alerting, log aggregation)
-- [VPCs, subnets, route tables](#VPCs, subnets, route tables)
+- [Monitoring, alerting, log aggregation](#monitoring-alerting-log-aggregation)
+- [VPCs, subnets, route tables](#vpcs-subnets-route-tables)
 
 ### Monitoring, alerting, log aggregation
 This module does not include anything for monitoring, alerting, or log aggregation. All EC2 Instances come with limited CloudWatch metrics built-in, but beyond that, you will have to provide your own solutions. We have an on going solution for implementing Prometheus, but that is still a work in progress
