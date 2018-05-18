@@ -22,7 +22,7 @@ Note the following parameter:
 - [AWS RDS DB parameter group](#aws-rds-db-parameter-group)
 
 ### Security Group
-The [AWS RDS Instance](#AWS RDS Instance) has a Security Group that allows:
+The [AWS RDS Instance](#aws-rds-instance) has a Security Group that allows:
 - Inbound requests from a specified security group ID (default the Fortify SSC security group ID)
 
 ### AWS RDS Instance

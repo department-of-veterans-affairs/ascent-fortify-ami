@@ -39,7 +39,7 @@ The Fortify EC2 Instance has a Security Group that allows:
 - Inbound requests from specified security group ids to Fortify SSC's web access port (default 8080)
 - Inbound requests from specified CIDR blocks to Fortify's ssh port (default 22)
 
-The [AWS RDS Instance](#AWS RDS Instance) has a Security Group that allows:
+The [AWS RDS Instance](#aws-rds-instance) has a Security Group that allows:
 - Inbound requests from a specified security group ID (default the Fortify SSC security group ID)
 
 ### IAM role and permissions
