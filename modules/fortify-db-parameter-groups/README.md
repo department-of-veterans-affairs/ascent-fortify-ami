@@ -7,7 +7,7 @@ This folder defines a [Terraform module](https://www.terraform.io/docs/modules/u
 ```
 module "parameter_group" {
   # Use version 1.1 of the fortify-database module
-  source                               = "github.com/department-of-veterans-affairs/ascent-fortify-ami.git//modules/fortify-db-parameter-groups?ref=v1.1"
+  source  = "github.com/department-of-veterans-affairs/ascent-fortify-ami.git//modules/fortify-db-parameter-groups?ref=v1.1"
 
   # A Name for the parameter group
   name   = "My Cool Fortify Database Parameter Group"
