@@ -1,5 +1,5 @@
 #!/bin/bash
-APACHE_LOG_DIR=/opt/tomcat/apache-tomcat-8.5.30/logs
+APACHE_LOG_DIR=/opt/tomcat/apache-tomcat-8.5.31/logs
 keepgoing=0
 echo "moving existing logs somewhere else..."
 if [ -f $APACHE_LOG_DIR/catalina.out ]; then
