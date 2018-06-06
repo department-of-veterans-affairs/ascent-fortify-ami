@@ -1,1 +1,0 @@
-CREATE DATABASE `ssc-cs` DEFAULT CHARACTER SET latin1 COLLATE latin1_general_cs;
