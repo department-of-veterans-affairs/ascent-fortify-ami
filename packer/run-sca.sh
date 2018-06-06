@@ -11,7 +11,7 @@ echo "*******************************************************************"
 # ##########################################
 # Acquire fortify license from s3 bucket
 # ##########################################
-aws s3api get-object --bucket ascent-fortify --key fortify.license --region us-gov-west-1 fortify.license
+aws s3api get-object --bucket fortify-utlity --key fortify.license --region us-gov-west-1 fortify.license
 sudo cp /fortify.license /root/.fortify/fortify.license
 
 
