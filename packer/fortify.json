@@ -14,7 +14,6 @@
       "source_ami_filter": { "filters": { "name": "ascent-base-*" }, "most_recent": true },
       "instance_type": "t2.micro",
       "vpc_id": "{{user `vpc_id`}}",
-      "associate_public_ip_address": "true",
       "subnet_id": "{{user `subnet_id`}}",
       "iam_instance_profile": "read_fortify_bucket",
       "ssh_username": "ec2-user",
@@ -51,7 +50,8 @@
         "install-tools.sh",
         "install-java.sh",
         "install-maven.sh",
-        "install-fortify.sh"
+        "install-fortify.sh",
+        "install-ant.sh"
       ]
     }
   ]
