@@ -31,7 +31,7 @@ resource "aws_instance" "jenkins_fortify_node" {
     command =  <<EOF
       API_TOKEN=$(curl -u ${var.jenkins_user}:${var.jenkins_password} ${var.jenkins_url}/me/configure | sed -rn 's/.*id="apiToken"[^>]*value="([a-z0-9]+)".*/\1/p')
       CRUMB=$(curl -s -u ${var.jenkins_user}:$${API_TOKEN} "${var.jenkins_url}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)")
-      curl -i -H $CRUMB -L -s -X POST -u ${var.jenkins_user}:$${API_TOKEN} http://jenkins.internal.vets-api.gov:8080/computer/${var.agent-name}/doDelete
+      curl -i -H $CRUMB -L -s -X POST -u ${var.jenkins_user}:$${API_TOKEN} ${var.jenkins_url}/computer/${var.agent-name}/doDelete
     EOF
   }
 }
