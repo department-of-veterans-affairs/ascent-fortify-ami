@@ -1,8 +1,7 @@
 #!/bin/bash
 
-ANT_HOME=/opt/apache-ant-1.10.3
-ANT_FILE=apache-ant-1.10.3-bin.tar.gz
-ANT_TASKS=maven-ant-tasks-2.1.3.jar
+ANT_HOME=/opt/apache-ant-1.10.4
+ANT_FILE=apache-ant-1.10.4-bin.tar.gz
 # -- A list of mirrors to try to download from
 mirrors=( http://apache.claz.org//ant/binaries/$ANT_FILE
           http://apache.cs.utah.edu//ant/binaries/$ANT_FILE
@@ -40,10 +39,6 @@ echo "******** Contents of .bash_profile"
 echo "ANT_HOME=$ANT_HOME"
 echo "PATH=$PATH"
 echo "############################################################################################################"
-
-echo "------- DOWNLOADING MAVEN ANT TASKS"
-wget http://www.apache.org/dyn/closer.cgi/maven/binaries/$ANT_TASKS
-sudo mv $ANT_TASKS $ANT_HOME/lib
 
 echo "------- INSTALLATIONS DONE! checking to see if it's installed properly...."
 ant -version
