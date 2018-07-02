@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Install sca onto the host
+sleep 30
 /home/ec2-user/run-sca.sh > /home/ec2-user/run-sca.out 2>&1
 
 # The following variables are replaced with terraform interpolation
