@@ -109,5 +109,5 @@ data "aws_iam_policy_document" "instance_role" {
 module "iam_s3_policies" {
   source         = "../s3-bucket-policies-to-role"
   iam_role_id    = "${aws_iam_role.instance_role.id}"
-  s3_bucket_name = "ascent-fortify"
+  s3_bucket_name = "${var.fortify_bucket_name}"
 }
