@@ -16,6 +16,7 @@
       "vpc_id": "{{user `vpc_id`}}",
       "subnet_id": "{{user `subnet_id`}}",
       "iam_instance_profile": "read_fortify_bucket",
+      "associate_public_ip_address": "true",
       "ssh_username": "ec2-user",
       "ssh_pty": true,
       "ami_name": "ascent-fortify {{timestamp}}",
