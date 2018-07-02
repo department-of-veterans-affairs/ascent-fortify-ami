@@ -13,7 +13,7 @@ echo "#######################################################################"
 
 
 
-sudo curl -s -L -o apache-maven-${MAVEN_VERSION}-bin.tar.gz http://mirror.jax.hugeserver.com/apache/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz; \
+sudo curl -s -L -o apache-maven-${MAVEN_VERSION}-bin.tar.gz https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/${MAVEN_VERSION}/apache-maven-${MAVEN_VERSION}-bin.tar.gz; \
     tar xzvf apache-maven-${MAVEN_VERSION}-bin.tar.gz; \
     sudo mv apache-maven-${MAVEN_VERSION} ${MAVEN_HOME}; \
     sudo rm -rf apache-maven-${MAVEN_VERSION}-bin.tar.gz; \
