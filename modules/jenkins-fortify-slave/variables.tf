@@ -45,7 +45,7 @@ variable "fortify_ssh_password" {
 # ---------------------------------------------------------------------------------------------------------------------
 variable "fortify_bucket_name" {
   description = "The name of the bucket that holds the fortify software and license"
-  deault      = "fortify-utility"
+  default      = "fortify-utility"
 }
 
 
