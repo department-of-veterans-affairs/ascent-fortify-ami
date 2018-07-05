@@ -43,6 +43,12 @@ variable "fortify_ssh_password" {
 # OPTIONAL PARAMETERS
 # These parameters have reasonable defaults.
 # ---------------------------------------------------------------------------------------------------------------------
+variable "fortify_bucket_name" {
+  description = "The name of the bucket that holds the fortify software and license"
+  default      = "fortify-utility"
+}
+
+
 variable "ssh_key_name" {
   description  = "The name of an EC2 Key Pair that can be used to SSH to the EC2 Instance. Set to an empty string to not associate a key pair"
   default      = ""
