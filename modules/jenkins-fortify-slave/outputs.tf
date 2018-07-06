@@ -6,3 +6,6 @@ output "security_group_id" {
   value = "${aws_security_group.fortify_security_group.id}"
 }
 
+output "ssh_port" {
+  value = "${module.security_group_rules.ssh_port}"
+}

@@ -1,7 +1,9 @@
 #!/bin/bash
 
+exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
+
 # Install sca onto the host
-/home/ec2-user/run-sca.sh > /home/ec2-user/run-sca.out 2>&1
+/home/ec2-user/run-sca.sh
 
 # The following variables are replaced with terraform interpolation
 /home/ec2-user/run-register-jenkins-node.sh "${jenkins_password}" \
@@ -13,5 +15,4 @@
                                        "${agent-description}" \
                                        "${agent-label-name}" \
                                        "${credentials_id}" \
-                                       "${vault_url}" \
-                                       > /home/ec2-user/run-register-jenkins-node.out 2>&1
+                                       "${vault_url}"
