@@ -30,7 +30,7 @@ resource "aws_security_group_rule" "allow_fortify_agent_inbound" {
   type       = "ingress"
   from_port  = "${var.jenkins_master_http_port}"
   to_port    = "${var.jenkins_master_http_port}"
-  protocol   = "all"
+  protocol   = "tcp"
   source_security_group_id = "${var.security_group_id}"
   security_group_id        = "${var.jenkins_master_security_group_id}"
 }
@@ -41,7 +41,7 @@ resource "aws_security_group_rule" "allow_fortify_agent_ssh_inbound" {
   type       = "ingress"
   from_port  = "${var.ssh_port}"
   to_port    = "${var.ssh_port}"
-  protocol   = "all"
+  protocol   = "tcp"
   source_security_group_id = "${var.security_group_id}"
   security_group_id        = "${var.jenkins_master_security_group_id}"
 }
