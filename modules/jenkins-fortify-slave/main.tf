@@ -23,6 +23,9 @@ resource "aws_instance" "jenkins_fortify_node" {
   tags {
       Name = "${var.instance_name}"
   }
+  root_block_device {
+    volume_size = "${var.disk_size}"
+  }
 
   # -- Have the agent de-register itself from jenkins before it's destroyed, so that jenkins
   # -- won't error with 'agent already exists' when we try to recreate

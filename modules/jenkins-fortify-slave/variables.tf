@@ -104,3 +104,8 @@ variable "allowed_ssh_cidr_blocks" {
   description = "The cidr block(s) allowed to connected through ssh"
   default     = ["0.0.0.0/0"]
 }
+
+variable "disk_size" {
+  description = "Size of the root block device. Defaults to 500GB"
+  default     = 500
+}
