@@ -23,3 +23,26 @@ resource "aws_security_group_rule" "allow_all_outbound" {
   cidr_blocks = ["0.0.0.0/0"]
   security_group_id = "${var.security_group_id}"
 }
+
+
+# Add a rule to allow the fortify agent to make jenkins api calls
+resource "aws_security_group_rule" "allow_fortify_agent_inbound" {
+  type       = "ingress"
+  from_port  = "${var.jenkins_master_http_port}"
+  to_port    = "${var.jenkins_master_http_port}"
+  protocol   = "tcp"
+  source_security_group_id = "${var.security_group_id}"
+  security_group_id        = "${var.jenkins_master_security_group_id}"
+}
+
+
+# Add a rule to allow the fortify agent have a slave connection to the jenkins master
+resource "aws_security_group_rule" "allow_fortify_agent_ssh_inbound" {
+  type       = "ingress"
+  from_port  = "${var.ssh_port}"
+  to_port    = "${var.ssh_port}"
+  protocol   = "tcp"
+  source_security_group_id = "${var.security_group_id}"
+  security_group_id        = "${var.jenkins_master_security_group_id}"
+}
+

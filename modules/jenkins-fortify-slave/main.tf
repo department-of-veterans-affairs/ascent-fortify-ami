@@ -58,6 +58,8 @@ module "security_group_rules" {
   source = "../jenkins-node-security-group-rules"
   security_group_id                  = "${aws_security_group.fortify_security_group.id}"
   allowed_ssh_cidr_blocks        = ["${var.allowed_ssh_cidr_blocks}"]
+  jenkins_master_security_group_id   = "${var.jenkins_master_security_group_id}"
+  jenkins_master_http_port           = "${var.jenkins_master_http_port}"
 }
 
 

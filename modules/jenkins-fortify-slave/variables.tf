@@ -39,10 +39,20 @@ variable "fortify_ssh_password" {
   description = "The password that jenkins will use to authenticate over ssh with the fortify agent"
 }
 
+variable "jenkins_master_security_group_id" {
+  description = "The security group ID of the Jenkins Master Instance, so we can grant the fortify agent access to some of its ports"
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
 # These parameters have reasonable defaults.
 # ---------------------------------------------------------------------------------------------------------------------
+variable "jenkins_master_http_port" {
+  description = "The HTTP port of the jenkins master instance. Usually 8080"
+  default     = "8080"
+}
+
+
 variable "fortify_bucket_name" {
   description = "The name of the bucket that holds the fortify software and license"
   default      = "fortify-utility"
